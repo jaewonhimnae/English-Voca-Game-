@@ -1,0 +1,50 @@
+
+ [
+    {
+        "id": "1",
+        "voca": "burn",
+        "simple": "burned",
+        "past": "burnt",
+        "meaning": "(불이) 타오르다",
+        "answered" : false,
+        "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/b/bur/burn_/burn_British_English_pronunciation_72454.mp3"
+    },
+    {
+        "id": "2",
+        "voca": "arise",
+        "simple": "arose",
+        "past": "arisen",
+        "meaning": "(비교적 격식) 특히 문제나 곤란한 상황이 생기다, 발생하다",
+        "answered" : false,
+        "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/a/ari/arise/arise_British_English_pronunciation_65838.mp3"
+    },
+    {
+        "id": "3",
+        "voca": "be",
+        "simple": "was",
+        "past": "been",
+        "meaning": "있다, 존재하다",
+        "answered" : false,
+        "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/b/be_/be_Br/be_British_English_pronunciation.mp3"
+    },
+    {
+        "id": "4",
+        "voca": "bind",
+        "simple": "bound",
+        "past": "bound",
+        "meaning": "묶다",
+        "answered" : false,
+        "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/b/bli/blind/blind_British_English_pronunciation_71247.mp3"
+    },
+    {
+        "id": "5",
+        "voca": "build",
+        "simple": "built",
+        "past": "built",
+        "meaning": "(건물을) 짓다, 건설[건축]하다",
+        "answered" : false,
+        "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/b/bui/build/build_British_English_pronunciation_72305.mp3"
+    }
+   
+
+]
