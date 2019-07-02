@@ -26,7 +26,7 @@ body {
 
 @media only screen and (max-width: 700px) {
     #answerInput {
-        font-size: 27px !important;
+        font-size: 20px !important;
     }
 }
 
@@ -113,8 +113,9 @@ body {
 
 @media only screen and (max-width: 700px) {
     .answerBtn {
-        width: 15% !important;
+        width: 14% !important;
         padding: 0 !important;
+        font-size: 13px !important;
     }
 }
 

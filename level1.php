@@ -125,6 +125,8 @@ $level1 = json_decode($data); // decode the JSON feed
 
 
     let incorrectVocas = []
+    let incorrectIndexs = []
+    let incorrectArray = []
     //To randomize the tense
     var myArray = ['simple', 'past']
     var randomTense = myArray[Math.floor(Math.random() * myArray.length)];
@@ -223,14 +225,44 @@ $level1 = json_decode($data); // decode the JSON feed
         }
     })
 
-    progressNumber.textContent = i + '/' + level1Array.length
-    progress.style.width = i / level1Array.length * 100 + '%'
-    mainVoca.textContent = level1Array[i].voca
+    function quiz_init(k){
 
-    if (randomTense === 'simple') {
-        answerInput.setAttribute("placeholder", "SIMPLE PAST")
-    } else {
-        answerInput.setAttribute("placeholder", "PAST PARTICIPLE")
+        progressNumber.textContent = k + '/' + level1Array.length
+        progress.style.width = k / level1Array.length * 100 + '%'
+        mainVoca.textContent = level1Array[k].voca
+
+        if (randomTense === 'simple') {
+            answerInput.setAttribute("placeholder", "SIMPLE PAST")
+        } else {
+            answerInput.setAttribute("placeholder", "PAST PARTICIPLE")
+        }
+
+    }
+
+    // 시작함수
+    quiz_init(i);
+
+    function check_end_quiz(data){
+        if (data === level1Array.length) {
+                  
+            // 틀린것이 있으면
+            if( incorrectArray.length ) {
+                level1Array = incorrectArray;
+                incorrectArray = [];
+                incorrectIndexs = [];
+                incorrectVocas = [];
+
+                i = 0;
+                quiz_init(i);
+
+            } else {
+                checkIncorrectBtn.style.display = "inline-block";
+                goTolevelTwoBtn.style.display = "inline-block";
+                answerBtn.disabled = true;
+                answerBtn.style.backgroundColor = "#DDDDDD"
+                $(".fadesIn").addClass("disabled");
+            }
+        }
     }
 
     $(document).ready(function() {
@@ -253,13 +285,6 @@ $level1 = json_decode($data); // decode the JSON feed
                     dataType: 'JSON',
                     success: function(data) {
                         //after finishing all of the quizes, show the btn for next process, and make the submit btn unable.
-                        if (data === level1Array.length) {
-                            checkIncorrectBtn.style.display = "inline-block";
-                            goTolevelTwoBtn.style.display = "inline-block";
-                            answerBtn.disabled = true;
-                            answerBtn.style.backgroundColor = "#DDDDDD"
-                            $(".fadesIn").addClass("disabled");
-                        }
 
                         level1Array[i].answered = true
                         console.log(level1Array);
@@ -293,6 +318,24 @@ $level1 = json_decode($data); // decode the JSON feed
                         } else {
                             answerInput.setAttribute("placeholder", "PAST PARTICIPLE")
                         }
+                        
+                        check_end_quiz(data);
+
+                        /*
+                        if (data === level1Array.length) {
+                            
+                            // 틀린것이 있으면
+                            if( incorrectArray ) {
+                                level1Array = incorrectArray;
+                            } else {
+                                checkIncorrectBtn.style.display = "inline-block";
+                                goTolevelTwoBtn.style.display = "inline-block";
+                                answerBtn.disabled = true;
+                                answerBtn.style.backgroundColor = "#DDDDDD"
+                                $(".fadesIn").addClass("disabled");
+                            }
+                        }
+                        */
 
                     }, // End of success
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -308,6 +351,7 @@ $level1 = json_decode($data); // decode the JSON feed
                     },
                     dataType: 'JSON',
                     success: function(data) {
+                        /*
                         if (data === level1Array.length) {
                             checkIncorrectBtn.style.display = "inline-block";
                             goTolevelTwoBtn.style.display = "inline-block";
@@ -321,9 +365,9 @@ $level1 = json_decode($data); // decode the JSON feed
                             //         i = 0;
                             //     }
                             // }
-
-
                         }
+                        */
+
                         counter = 10;
                         i = data;
                         progress.style.width = i / level1Array.length * 100 + '%'
@@ -336,10 +380,21 @@ $level1 = json_decode($data); // decode the JSON feed
                             wrongSign.style.display = "none";
                         }, 2000);
 
-                        // Put all of incorrect words into incorrectVocas Array, and then display 
-                        incorrectVocas = incorrectVocas.concat(level1Array[i - 1].voca + '/' + level1Array[i - 1].simple + '/' + level1Array[i - 1].past + '<br> ')
-                        // but In case there is a word already included in incorrect word because of TimeOut, 
-                        // we need to filter the duplicate one. 
+                        var jj = i - 1,
+                            plag = true;
+
+                        if( ! ( incorrectIndexs.length && incorrectIndexs.includes(jj) ) ){
+                            // Put all of incorrect words into incorrectVocas Array, and then display 
+                            incorrectVocas = incorrectVocas.concat(level1Array[jj].voca + '/' + level1Array[jj].simple + '/' + level1Array[jj].past + '<br> ')
+                            // but In case there is a word already included in incorrect word because of TimeOut, 
+                            // we need to filter the duplicate one. 
+                            incorrectIndexs.push(jj);
+
+                            incorrectArray.push(level1Array[jj]);
+                        }
+
+                        i = (plag === false) ? incorrectIndexs.slice(-1).pop() : i;
+
                         var names = incorrectVocas;
                         var uniqueIncorrectVocas = [];
                         $.each(names, function(i, el) {
@@ -347,25 +402,27 @@ $level1 = json_decode($data); // decode the JSON feed
                         });
 
                         if (!level1Array[i]) {
-                            i = i - 1
+                            i = jj;
                         }
+
                         // Display incorrectVocas 
                         incorrectVoca.innerHTML = uniqueIncorrectVocas.join("\n");
                         answerInput.value = "";
                         mainVoca.textContent = level1Array[i].voca;
+
                         wrongAnswer.style.display = 'block';
-                        i = data;
+                        //i = data;
 
-                        meaning.textContent = level1Array[i - 1].meaning;
+                        meaning.textContent = level1Array[jj].meaning;
                         // For Pronunciation part
-                        answerSound.textContent = '현재형' + level1Array[i - 1].voca;
-                        answerSound.dataset.dataValue = level1Array[i - 1].mp3;
+                        answerSound.textContent = '현재형' + level1Array[jj].voca;
+                        answerSound.dataset.dataValue = level1Array[jj].mp3;
 
-                        answerSoundTwo.textContent = '과거형' + level1Array[i - 1].simple;
-                        answerSoundTwo.dataset.dataValue = level1Array[i - 1].mp3;
+                        answerSoundTwo.textContent = '과거형' + level1Array[jj].simple;
+                        answerSoundTwo.dataset.dataValue = level1Array[jj].mp3;
 
-                        answerSoundThree.textContent = '과거 분사형' + level1Array[i - 1].past;
-                        answerSoundThree.dataset.dataValue = level1Array[i - 1].mp3;
+                        answerSoundThree.textContent = '과거 분사형' + level1Array[jj].past;
+                        answerSoundThree.dataset.dataValue = level1Array[jj].mp3;
 
                         randomTense = myArray[Math.floor(Math.random() * myArray.length)];
                         if (randomTense === 'simple') {
@@ -373,6 +430,9 @@ $level1 = json_decode($data); // decode the JSON feed
                         } else {
                             answerInput.setAttribute("placeholder", "PAST PARTICIPLE")
                         }
+
+                        check_end_quiz(data);
+
                     }, // End of success
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                         alert(textStatus);
