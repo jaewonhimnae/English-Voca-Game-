@@ -19,9 +19,13 @@ shuffle($level1);
     <div style="margin-bottom: 5px;">
         <span id="mainVoca"></span>
         <img class="rightSign rightWrongSign" src="icons/right.png" alt="right">
-        <img class="wrongSign rightWrongSign" src="icons/wrong.png" alt="wrong">  
-       <div style="font-size:20px;color: chocolate;"> (<span class="description"></span>) </div>
-      
+        <img class="wrongSign rightWrongSign" src="icons/wrong.png" alt="wrong">
+        <div style="font-size:20px;color: chocolate;">
+            (<span class="description"></span>)    
+            <p class="timeOutAlarm" style="color: crimson;"></p>
+            <span class="howToRestartNoti" style="color: cadetblue;"></span>
+        </div>
+
     </div>
     <div class="row" style="margin-left:auto;">
         <input type="text" id="answerInput" class="form-control col-10 " id="answerInput" aria-describedby="answerInput" placeholder="">
@@ -124,12 +128,15 @@ shuffle($level1);
         goBackToQuizBtn = document.querySelector('.goBackToQuizBtn'),
         rightSign = document.querySelector('.rightSign'),
         wrongSign = document.querySelector('.wrongSign'),
-        meaning = document.querySelector('.meaning');
+        meaning = document.querySelector('.meaning'),
+        timeOutAlarm = document.querySelector('.timeOutAlarm'),
+        howToRestartNoti = document.querySelector('.howToRestartNoti');
 
 
     let incorrectVocas = []
     let incorrectIndexs = []
     let incorrectArray = []
+    let TimeOutWord = "";
     //To randomize the tense
     var myArray = ['simple', 'past']
     var randomTense = myArray[Math.floor(Math.random() * myArray.length)];
@@ -194,10 +201,11 @@ shuffle($level1);
                 fadesIn4.style.backgroundColor = "red";
             }
             if (counter === 0) {
-                answerInput.value = "";
-                answerInput.setAttribute("placeholder", "Click Here or Hit Enter to Restart!")
-
-                incorrectVocas = incorrectVocas.concat(level1Array[i].voca + '/' + level1Array[i].simple + '/' + level1Array[i].past + '<br> ')
+                //answerInput.value = "";
+                howToRestartNoti.textContent = `Click Input or Hit Enter to Restart!`
+                //answerInput.setAttribute("placeholder", "Click Here or Hit Enter to Restart!")
+                TimeOutWord = level1Array[i].voca
+                incorrectVocas = incorrectVocas.concat(`${level1Array[i].voca}/${level1Array[i].simple}/${level1Array[i].past}<br>`)
 
                 fadesIn5.style.backgroundColor = "red";
                 answerBtn.disabled = true;
@@ -207,6 +215,8 @@ shuffle($level1);
                 $("#answerInput").on('keypress click', function(e) {
 
                     if (e.which === 13 || e.type === 'click') {
+                        howToRestartNoti.textContent = ""
+
                         if (randomTense === 'simple') {
                             description.textContent = "SIMPLE PAST";
                             //answerInput.setAttribute("placeholder", "SIMPLE PAST");
@@ -294,8 +304,14 @@ shuffle($level1);
                     dataType: 'JSON',
                     success: function(data) {
                         //after finishing all of the quizes, show the btn for next process, and make the submit btn unable.
+                        timeOutAlarm.textContent = "" 
+                        if (TimeOutWord !== "") {
+                            timeOutAlarm.textContent = `${TimeOutWord}단어 문제의 시간이 초과 됐습니다.` 
+                        }
 
-                        level1Array[i].answered = true
+                        TimeOutWord = "";
+
+                        level1Array[i].answered = true;
                         console.log(level1Array);
                         rightSign.style.display = "block";
 
@@ -371,6 +387,13 @@ shuffle($level1);
                             $(".fadesIn").addClass("disabled");
                         }
                         */
+                            timeOutAlarm.textContent = "" 
+                        if (TimeOutWord !== "") {
+                            timeOutAlarm.textContent = `${TimeOutWord}단어 문제의 시간이 초과 됐습니다.` 
+                        }
+
+                        TimeOutWord = "";
+
 
                         counter = 10;
                         i = data;
@@ -389,7 +412,7 @@ shuffle($level1);
 
                         if (!(incorrectIndexs.length && incorrectIndexs.includes(jj))) {
                             // Put all of incorrect words into incorrectVocas Array, and then display 
-                            incorrectVocas = incorrectVocas.concat(level1Array[jj].voca + '/' + level1Array[jj].simple + '/' + level1Array[jj].past + '<br> ')
+                            incorrectVocas = incorrectVocas.concat(`${level1Array[jj].voca}/${level1Array[jj].simple}/${level1Array[jj].past}<br>`)
                             // but In case there is a word already included in incorrect word because of TimeOut, 
                             // we need to filter the duplicate one. 
                             incorrectIndexs.push(jj);
