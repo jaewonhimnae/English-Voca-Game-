@@ -18,6 +18,8 @@ $level1 = json_decode($data); // decode the JSON feed
     <p style="margin-bottom: -3px; color: grey;">infinite</p>
     <div style="margin-bottom: 5px;">
         <span id="mainVoca"></span>
+
+        (<span class="description"></span>)
         <img class="rightSign rightWrongSign" src="icons/right.png" alt="right">
         <img class="wrongSign rightWrongSign" src="icons/wrong.png" alt="wrong">
     </div>
@@ -38,13 +40,13 @@ $level1 = json_decode($data); // decode the JSON feed
     <br>
 
     <div class="button_cont" align="center">
-        <button style="display:none;vertical-align: bottom;" id="checkIncorrectBtn" href="#" class="example_c checkIncorrectBtn" tabindex="-1" role="button" aria-disabled="true">
+        <!-- <button style="display:none;vertical-align: bottom;" id="checkIncorrectBtn" href="#" class="example_c checkIncorrectBtn" tabindex="-1" role="button" aria-disabled="true">
             Check Incorrect Answers
-        </button>
+        </button> -->
 
-        <button style="display:none" id="goTolevelTwoBtn" href="./level2.php" class="example_c goTolevelTwoBtn" tabindex="-1" role="button" aria-disabled="true">
+        <a style="display:none" id="goTolevelTwoBtn" href="./level2.php" class="example_c goTolevelTwoBtn" tabindex="-1" role="button" aria-disabled="true">
             Go to Level 2
-        </button>
+        </a>
     </div>
 
     <div id="wrongAnswer" style="display:none;border: 1px solid grey;border-radius: 8px;margin-top: 10px; padding:20px;">
@@ -116,7 +118,8 @@ $level1 = json_decode($data); // decode the JSON feed
         incorrectVoca = document.querySelector('.incorrectVoca'),
         quizPart = document.querySelector('.quizPart'),
         resultPart = document.querySelector('.resultPart'),
-        checkIncorrectBtn = document.querySelector('.checkIncorrectBtn'),
+        //checkIncorrectBtn = document.querySelector('.checkIncorrectBtn'),
+        description = document.querySelector('.description'),
         goTolevelTwoBtn = document.querySelector('.goTolevelTwoBtn'),
         goBackToQuizBtn = document.querySelector('.goBackToQuizBtn'),
         rightSign = document.querySelector('.rightSign'),
@@ -137,7 +140,7 @@ $level1 = json_decode($data); // decode the JSON feed
     var level1 = '<?php echo json_encode($level1); ?>'
     var level1Array = JSON.parse(level1);
     //when clicking   checkIncorrectBtn change page into Result Part
-    checkIncorrectBtn.addEventListener('click', goToResultPart)
+    //checkIncorrectBtn.addEventListener('click', goToResultPart)
 
     function goToResultPart() {
         resultPart.style.display = "block";
@@ -191,6 +194,7 @@ $level1 = json_decode($data); // decode the JSON feed
                 fadesIn4.style.backgroundColor = "red";
             }
             if (counter === 0) {
+                answerInput.value = "";
                 answerInput.setAttribute("placeholder", "Click Here to RESTART!!!")
 
                 incorrectVocas = incorrectVocas.concat(level1Array[i].voca + '/' + level1Array[i].simple + '/' + level1Array[i].past + '<br> ')
@@ -203,9 +207,11 @@ $level1 = json_decode($data); // decode the JSON feed
                 $("#answerInput").click(function() {
 
                     if (randomTense === 'simple') {
-                        answerInput.setAttribute("placeholder", "SIMPLE PAST")
+                        description.textContent = "SIMPLE PAST";
+                        answerInput.setAttribute("placeholder", "SIMPLE PAST");
                     } else {
-                        answerInput.setAttribute("placeholder", "PAST PARTICIPLE")
+                        description.textContent = "PAST PARTICIPLE";
+                        answerInput.setAttribute("placeholder", "PAST PARTICIPLE");
                     }
 
                     wrongAnswer.style.display = 'none';
@@ -225,16 +231,18 @@ $level1 = json_decode($data); // decode the JSON feed
         }
     })
 
-    function quiz_init(k){
+    function quiz_init(k) {
 
         progressNumber.textContent = k + '/' + level1Array.length
         progress.style.width = k / level1Array.length * 100 + '%'
         mainVoca.textContent = level1Array[k].voca
 
         if (randomTense === 'simple') {
-            answerInput.setAttribute("placeholder", "SIMPLE PAST")
+            description.textContent = "SIMPLE PAST";
+            answerInput.setAttribute("placeholder", "SIMPLE PAST");
         } else {
-            answerInput.setAttribute("placeholder", "PAST PARTICIPLE")
+            description.textContent = "PAST PARTICIPLE";
+            answerInput.setAttribute("placeholder", "PAST PARTICIPLE");
         }
 
     }
@@ -242,11 +250,11 @@ $level1 = json_decode($data); // decode the JSON feed
     // 시작함수
     quiz_init(i);
 
-    function check_end_quiz(data){
+    function check_end_quiz(data) {
         if (data === level1Array.length) {
-                  
+
             // 틀린것이 있으면
-            if( incorrectArray.length ) {
+            if (incorrectArray.length) {
                 level1Array = incorrectArray;
                 incorrectArray = [];
                 incorrectIndexs = [];
@@ -256,7 +264,7 @@ $level1 = json_decode($data); // decode the JSON feed
                 quiz_init(i);
 
             } else {
-                checkIncorrectBtn.style.display = "inline-block";
+                //checkIncorrectBtn.style.display = "inline-block";
                 goTolevelTwoBtn.style.display = "inline-block";
                 answerBtn.disabled = true;
                 answerBtn.style.backgroundColor = "#DDDDDD"
@@ -292,7 +300,7 @@ $level1 = json_decode($data); // decode the JSON feed
 
                         setTimeout(() => {
                             rightSign.style.display = "none";
-                        }, 2000);
+                        }, 1000);
 
                         //after submitting the answer, make the counter back to 10, so it can countdown from the start again.
                         counter = 10;
@@ -314,11 +322,13 @@ $level1 = json_decode($data); // decode the JSON feed
                         //change the Tense for next quiz, and Assign Input place holder Depending on the changed Tense.
                         randomTense = myArray[Math.floor(Math.random() * myArray.length)];
                         if (randomTense === 'simple') {
-                            answerInput.setAttribute("placeholder", "SIMPLE PAST")
+                            description.textContent = "SIMPLE PAST";
+                            answerInput.setAttribute("placeholder", "SIMPLE PAST");
                         } else {
-                            answerInput.setAttribute("placeholder", "PAST PARTICIPLE")
-                        }
-                        
+                            description.textContent = "PAST PARTICIPLE";
+                            answerInput.setAttribute("placeholder", "PAST PARTICIPLE");
+                        };
+
                         check_end_quiz(data);
 
                         /*
@@ -358,13 +368,6 @@ $level1 = json_decode($data); // decode the JSON feed
                             answerBtn.disabled = true;
                             answerBtn.style.backgroundColor = "#DDDDDD"
                             $(".fadesIn").addClass("disabled");
-
-                            // for (let index = 0; index < array.length; index++) {
-                            //     const element = level1Array[index].answered;
-                            //     if (element === false) {
-                            //         i = 0;
-                            //     }
-                            // }
                         }
                         */
 
@@ -378,12 +381,12 @@ $level1 = json_decode($data); // decode the JSON feed
 
                         setTimeout(() => {
                             wrongSign.style.display = "none";
-                        }, 2000);
+                        }, 1000);
 
                         var jj = i - 1,
                             plag = true;
 
-                        if( ! ( incorrectIndexs.length && incorrectIndexs.includes(jj) ) ){
+                        if (!(incorrectIndexs.length && incorrectIndexs.includes(jj))) {
                             // Put all of incorrect words into incorrectVocas Array, and then display 
                             incorrectVocas = incorrectVocas.concat(level1Array[jj].voca + '/' + level1Array[jj].simple + '/' + level1Array[jj].past + '<br> ')
                             // but In case there is a word already included in incorrect word because of TimeOut, 
@@ -426,8 +429,10 @@ $level1 = json_decode($data); // decode the JSON feed
 
                         randomTense = myArray[Math.floor(Math.random() * myArray.length)];
                         if (randomTense === 'simple') {
+                            description.textContent = "SIMPLE PAST";
                             answerInput.setAttribute("placeholder", "SIMPLE PAST")
                         } else {
+                            description.textContent = "PAST PARTICIPLE";
                             answerInput.setAttribute("placeholder", "PAST PARTICIPLE")
                         }
 

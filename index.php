@@ -1,9 +1,6 @@
 <?php
 include("header.php");
 ?>
-
-
-
 <div>
     <ul>
         <li>
@@ -15,9 +12,6 @@ include("header.php");
         </li>
     </ul>
 </div>
-
-
-
 <?php
 include("footer.php")
 ?>
