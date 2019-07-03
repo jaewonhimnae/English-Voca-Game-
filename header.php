@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="index.css">
 
   <!-- Bootstrap CSS -->
-  <title>Hello, world!</title>
+  <title>Irregular Verb</title>
 </head>
 
 <body>
