@@ -3,7 +3,7 @@ include("header.php");
 $url = 'level1.json'; // path to your JSON file
 $data = file_get_contents($url); // put the contents of the file into a variable
 $level1 = json_decode($data); // decode the JSON feed
-//shuffle($level1);
+shuffle($level1);
 ?>
 <div class="quizPart">
     <div class="progressBar">
@@ -18,10 +18,10 @@ $level1 = json_decode($data); // decode the JSON feed
     <p style="margin-bottom: -3px; color: grey;">infinite</p>
     <div style="margin-bottom: 5px;">
         <span id="mainVoca"></span>
-
-        (<span class="description"></span>)
         <img class="rightSign rightWrongSign" src="icons/right.png" alt="right">
-        <img class="wrongSign rightWrongSign" src="icons/wrong.png" alt="wrong">
+        <img class="wrongSign rightWrongSign" src="icons/wrong.png" alt="wrong">  
+       <div style="font-size:20px;color: chocolate;"> (<span class="description"></span>) </div>
+      
     </div>
     <div class="row" style="margin-left:auto;">
         <input type="text" id="answerInput" class="form-control col-10 " id="answerInput" aria-describedby="answerInput" placeholder="">

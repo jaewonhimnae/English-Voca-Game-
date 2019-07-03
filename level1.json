@@ -1,12 +1,11 @@
-
- [
+[
     {
         "id": "1",
         "voca": "burn",
         "simple": "burned",
         "past": "burnt",
         "meaning": "(불이) 타오르다",
-        "answered" : false,
+        "answered": false,
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/b/bur/burn_/burn_British_English_pronunciation_72454.mp3"
     },
     {
@@ -15,16 +14,16 @@
         "simple": "arose",
         "past": "arisen",
         "meaning": "(비교적 격식) 특히 문제나 곤란한 상황이 생기다, 발생하다",
-        "answered" : false,
+        "answered": false,
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/a/ari/arise/arise_British_English_pronunciation_65838.mp3"
     },
     {
         "id": "3",
-        "voca": "be",
+        "voca": "is",
         "simple": "was",
         "past": "been",
         "meaning": "있다, 존재하다",
-        "answered" : false,
+        "answered": false,
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/b/be_/be_Br/be_British_English_pronunciation.mp3"
     },
     {
@@ -33,7 +32,7 @@
         "simple": "bound",
         "past": "bound",
         "meaning": "묶다",
-        "answered" : false,
+        "answered": false,
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/b/bli/blind/blind_British_English_pronunciation_71247.mp3"
     },
     {
@@ -42,15 +41,15 @@
         "simple": "built",
         "past": "built",
         "meaning": "(건물을) 짓다, 건설[건축]하다",
-        "answered" : false,
+        "answered": false,
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/b/bui/build/build_British_English_pronunciation_72305.mp3"
-    }
-    ,
+    },
     {
         "id": "6",
         "voca": "catch",
         "simple": "caught",
         "past": "caught",
+        "meaning": "(움직이는 물체를) 잡다[받다]",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/c/cat/catch/catch_British_English_pronunciation_66879.mp3"
     },
     {
@@ -58,6 +57,7 @@
         "voca": "cling",
         "simple": "clung",
         "past": "clung",
+        "meaning": "꼭 붙잡다, 매달리다",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/c/cli/cling/cling_British_English_pronunciation_67888.mp3"
     },
     {
@@ -65,6 +65,7 @@
         "voca": "deal",
         "simple": "dealt",
         "past": "dealt",
+        "meaning": "(문제·사건 따위를) 처리하다, 대처하다[with]",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/d/dea/deal_/deal_British_English_pronunciation_72923.mp3"
     },
     {
@@ -72,14 +73,15 @@
         "voca": "eat",
         "simple": "ate",
         "past": "eaten",
+        "meaning": "(음식·밥 등을) 먹다",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/e/eat/eat_B/eat_British_English_pronunciation_75265.mp3"
-    }
-    ,
+    },
     {
         "id": "10",
         "voca": "find",
         "simple": "found",
         "past": "found",
+        "meaning": "(우연히) 찾다[발견하다]",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/f/fin/find_/find_British_English_pronunciation_77274.mp3"
     },
     {
@@ -87,6 +89,7 @@
         "voca": "grow",
         "simple": "grew",
         "past": "grown",
+        "meaning": "(크기·수·강도·특질이) 커지다[늘어나다/증가하다]",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/g/gro/grow_/grow_British_English_pronunciation_80046.mp3"
     },
     {
@@ -94,6 +97,7 @@
         "voca": "hold",
         "simple": "held",
         "past": "held",
+        "meaning": "(손팔 등으로) 잡고[쥐고/들고/안고/받치고] 있다[가다/다니다]",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/h/hol/hold_/hold_British_English_pronunciation_81595.mp3"
     },
     {
@@ -101,6 +105,7 @@
         "voca": "hurt",
         "simple": "hurt",
         "past": "hurt",
+        "meaning": "다치게[아프게] 하다",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/h/hur/hurt_/hurt_British_English_pronunciation_82093.mp3"
     },
     {
@@ -108,6 +113,7 @@
         "voca": "mistake",
         "simple": "mistook",
         "past": "mistaken",
+        "meaning": "실수, 잘못",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/m/mis/mista/mistake_British_English_pronunciation_87294.mp3"
     },
     {
@@ -115,6 +121,7 @@
         "voca": "set",
         "simple": "set",
         "past": "set",
+        "meaning": "(특정한 장소위치에) 놓다",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/s/set/set_B/set_British_English_pronunciation_97308.mp3"
     },
     {
@@ -122,6 +129,7 @@
         "voca": "bind",
         "simple": "bound",
         "past": "bound",
+        "meaning": "묶다",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/b/bin/bind_/bind_British_English_pronunciation_70999.mp3"
     },
     {
@@ -129,6 +137,7 @@
         "voca": "tell",
         "simple": "told",
         "past": "told",
+        "meaning": "(말·글로) 알리다[전하다], 말하다",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/t/tel/tell_/tell_British_English_pronunciation_101683.mp3"
     },
     {
@@ -136,6 +145,7 @@
         "voca": "throw",
         "simple": "threw",
         "past": "thrown",
+        "meaning": "던지다",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/t/thr/throw/throw_British_English_pronunciation_102129.mp3"
     },
     {
@@ -143,6 +153,7 @@
         "voca": "seek",
         "simple": "sought",
         "past": "sought",
+        "meaning": "(…을 발견하기 위해) 찾다",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/s/see/seek_/seek_British_English_pronunciation_96996.mp3"
     },
     {
@@ -150,8 +161,7 @@
         "voca": "rise",
         "simple": "rose",
         "past": "risen",
+        "meaning": "(수량·수준 등의) 증가[상승]",
         "mp3": "https://www.macmillandictionary.com/media/british/uk_pron/r/ris/rise_/rise_British_English_pronunciation_95370.mp3"
     }
-   
-
 ]
