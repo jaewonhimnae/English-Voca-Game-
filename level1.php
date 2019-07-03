@@ -17,13 +17,14 @@ shuffle($level1);
 
     <p style="margin-bottom: -3px; color: grey;">infinite</p>
     <div style="margin-bottom: 5px;">
-        <span id="mainVoca"></span>
+        <span id="mainVoca"></span><br>
+        <span style="font-size:1.5rem;">뜻 :</span> <span class="meaning" style="font-size:1.5rem;"></span>
         <img class="rightSign rightWrongSign" src="icons/right.png" alt="right">
         <img class="wrongSign rightWrongSign" src="icons/wrong.png" alt="wrong">
-        <div style="font-size:20px;color: chocolate;">
-            (<span class="description"></span>)    
+        <div style="font-size:20px;color: chocolate; margin-top:10px">
+            (<span class="description"></span>)
             <p class="timeOutAlarm" style="color: crimson;"></p>
-            <span class="howToRestartNoti" style="color: cadetblue;"></span>
+            <p class="howToRestartNoti" style="color: cadetblue;margin-top: -10px;margin-bottom: 0;"></p>
         </div>
 
     </div>
@@ -53,26 +54,22 @@ shuffle($level1);
         </a>
     </div>
 
-    <div id="wrongAnswer" style="display:none;border: 1px solid grey;border-radius: 8px;margin-top: 10px; padding:20px;">
+    <div id="wrongAnswer" style="display:none;border: 1px solid grey;margin-top: 10px; padding:20px;">
         <del class="wrongAnswerTyped" style="font-size:2rem"></del>
         <h2> Wrong! Correct answer:</h2>
         <div style="margin-bottom:7px;">
-            <span style="font-size:1.5rem;">뜻 :</span> <span class="meaning" style="font-size:1.5rem;"></span>
+
         </div>
         <li style="display:block">
             <div>
                 <a id="playPronunciation" href="#" style="fontSize:30px">
                     <img class="playIcon" src="icons/play.png" alt="Play">
                     <span id="answerSound" class="answerSoundSpan" data-value=""></span>
-                </a>
-            </div>
-            <div>
+                </a> &nbsp;&nbsp;&nbsp;
                 <a id="playPronunciationTwo" href="#" style="fontSize:30px">
                     <img class="playIcon" src="icons/play.png" alt="Play">
                     <span id="answerSoundTwo" class="answerSoundSpan" data-value=""></span>
-                </a>
-            </div>
-            <div>
+                </a> &nbsp;&nbsp;&nbsp;
                 <a id="playPronunciationThree" href="#" style="fontSize:30px">
                     <img class="playIcon" src="icons/play.png" alt="Play">
                     <span id="answerSoundThree" class="answerSoundSpan" data-value=""></span>
@@ -205,7 +202,8 @@ shuffle($level1);
                 howToRestartNoti.textContent = `Click Input or Hit Enter to Restart!`
                 //answerInput.setAttribute("placeholder", "Click Here or Hit Enter to Restart!")
                 TimeOutWord = level1Array[i].voca
-                incorrectVocas = incorrectVocas.concat(`${level1Array[i].voca}/${level1Array[i].simple}/${level1Array[i].past}<br>`)
+                incorrectVocas = incorrectVocas
+                    .concat(`${level1Array[i].voca}/${level1Array[i].simple}/${level1Array[i].past}<br>`)
 
                 fadesIn5.style.backgroundColor = "red";
                 answerBtn.disabled = true;
@@ -243,7 +241,7 @@ shuffle($level1);
     })
 
     function quiz_init(k) {
-
+        meaning.textContent = level1Array[i].meaning;
         progressNumber.textContent = k + '/' + level1Array.length
         progress.style.width = k / level1Array.length * 100 + '%'
         mainVoca.textContent = level1Array[k].voca
@@ -304,12 +302,18 @@ shuffle($level1);
                     dataType: 'JSON',
                     success: function(data) {
                         //after finishing all of the quizes, show the btn for next process, and make the submit btn unable.
-                        timeOutAlarm.textContent = "" 
+                        timeOutAlarm.textContent = ""
+
+
                         if (TimeOutWord !== "") {
-                            timeOutAlarm.textContent = `${TimeOutWord}단어 문제의 시간이 초과 됐습니다.` 
+                            timeOutAlarm.textContent = `'${TimeOutWord}' 단어 문제의 시간이 초과 됐습니다.`
                         }
 
                         TimeOutWord = "";
+
+                        setTimeout(() => {
+                            timeOutAlarm.textContent = "";
+                        }, 3000);
 
                         level1Array[i].answered = true;
                         console.log(level1Array);
@@ -323,6 +327,7 @@ shuffle($level1);
                         counter = 10;
                         //fetching the data(Number) from the ajax result and put that value into i. 
                         i = data;
+                        meaning.textContent = level1Array[i].meaning;
                         //after answering correct one, remove the wrongAnswer part, and input value.
                         wrongAnswer.style.display = 'none';
                         answerInput.value = "";
@@ -387,19 +392,23 @@ shuffle($level1);
                             $(".fadesIn").addClass("disabled");
                         }
                         */
-                            timeOutAlarm.textContent = "" 
+                        timeOutAlarm.textContent = ""
                         if (TimeOutWord !== "") {
-                            timeOutAlarm.textContent = `${TimeOutWord}단어 문제의 시간이 초과 됐습니다.` 
+                            timeOutAlarm.textContent = `'${TimeOutWord}' 단어 문제의 시간이 초과 됐습니다.`
                         }
 
                         TimeOutWord = "";
 
+                        setTimeout(() => {
+                            timeOutAlarm.textContent = "";
+                        }, 3000);
 
                         counter = 10;
                         i = data;
                         progress.style.width = i / level1Array.length * 100 + '%'
                         progressNumber.textContent = i + '/' + level1Array.length;
                         wrongAnswerTyped.textContent = answerInput.value;
+                        meaning.textContent = level1Array[i].meaning;
 
                         wrongSign.style.display = "block";
 
@@ -412,7 +421,8 @@ shuffle($level1);
 
                         if (!(incorrectIndexs.length && incorrectIndexs.includes(jj))) {
                             // Put all of incorrect words into incorrectVocas Array, and then display 
-                            incorrectVocas = incorrectVocas.concat(`${level1Array[jj].voca}/${level1Array[jj].simple}/${level1Array[jj].past}<br>`)
+                            incorrectVocas = incorrectVocas
+                                .concat(`${level1Array[jj].voca}/${level1Array[jj].simple}/${level1Array[jj].past}<br>`)
                             // but In case there is a word already included in incorrect word because of TimeOut, 
                             // we need to filter the duplicate one. 
                             incorrectIndexs.push(jj);
@@ -440,15 +450,15 @@ shuffle($level1);
                         wrongAnswer.style.display = 'block';
                         //i = data;
 
-                        meaning.textContent = level1Array[jj].meaning;
+                        //meaning.textContent = level1Array[jj].meaning;
                         // For Pronunciation part
-                        answerSound.textContent = '현재형' + level1Array[jj].voca;
+                        answerSound.textContent = level1Array[jj].voca;
                         answerSound.dataset.dataValue = level1Array[jj].mp3;
 
-                        answerSoundTwo.textContent = '과거형' + level1Array[jj].simple;
+                        answerSoundTwo.textContent = level1Array[jj].simple;
                         answerSoundTwo.dataset.dataValue = level1Array[jj].mp3;
 
-                        answerSoundThree.textContent = '과거 분사형' + level1Array[jj].past;
+                        answerSoundThree.textContent = level1Array[jj].past;
                         answerSoundThree.dataset.dataValue = level1Array[jj].mp3;
 
                         randomTense = myArray[Math.floor(Math.random() * myArray.length)];
