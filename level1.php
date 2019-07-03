@@ -195,7 +195,7 @@ $level1 = json_decode($data); // decode the JSON feed
             }
             if (counter === 0) {
                 answerInput.value = "";
-                answerInput.setAttribute("placeholder", "Click Here to RESTART!!!")
+                answerInput.setAttribute("placeholder", "Click Here or Hit Enter to Restart!")
 
                 incorrectVocas = incorrectVocas.concat(level1Array[i].voca + '/' + level1Array[i].simple + '/' + level1Array[i].past + '<br> ')
 
@@ -204,20 +204,21 @@ $level1 = json_decode($data); // decode the JSON feed
                 answerBtn.style.backgroundColor = "#DDDDDD"
 
                 clearInterval(Interval);
-                $("#answerInput").click(function() {
+                $("#answerInput").on('keypress click', function(e) {
 
-                    if (randomTense === 'simple') {
-                        description.textContent = "SIMPLE PAST";
-                        answerInput.setAttribute("placeholder", "SIMPLE PAST");
-                    } else {
-                        description.textContent = "PAST PARTICIPLE";
-                        answerInput.setAttribute("placeholder", "PAST PARTICIPLE");
+                    if (e.which === 13 || e.type === 'click') {
+                        if (randomTense === 'simple') {
+                            description.textContent = "SIMPLE PAST";
+                            //answerInput.setAttribute("placeholder", "SIMPLE PAST");
+                        } else {
+                            description.textContent = "PAST PARTICIPLE";
+                            //answerInput.setAttribute("placeholder", "PAST PARTICIPLE");
+                        }
+                        wrongAnswer.style.display = 'none';
+                        if (switch_on === true) return false
+                        countDown();
+                        switch_on = true
                     }
-
-                    wrongAnswer.style.display = 'none';
-                    if (switch_on === true) return false
-                    countDown();
-                    switch_on = true
                 });
             }
         }, 1000);
@@ -239,10 +240,10 @@ $level1 = json_decode($data); // decode the JSON feed
 
         if (randomTense === 'simple') {
             description.textContent = "SIMPLE PAST";
-            answerInput.setAttribute("placeholder", "SIMPLE PAST");
+            //answerInput.setAttribute("placeholder", "SIMPLE PAST");
         } else {
             description.textContent = "PAST PARTICIPLE";
-            answerInput.setAttribute("placeholder", "PAST PARTICIPLE");
+            //answerInput.setAttribute("placeholder", "PAST PARTICIPLE");
         }
 
     }
@@ -323,10 +324,10 @@ $level1 = json_decode($data); // decode the JSON feed
                         randomTense = myArray[Math.floor(Math.random() * myArray.length)];
                         if (randomTense === 'simple') {
                             description.textContent = "SIMPLE PAST";
-                            answerInput.setAttribute("placeholder", "SIMPLE PAST");
+                            //answerInput.setAttribute("placeholder", "SIMPLE PAST");
                         } else {
                             description.textContent = "PAST PARTICIPLE";
-                            answerInput.setAttribute("placeholder", "PAST PARTICIPLE");
+                            //answerInput.setAttribute("placeholder", "PAST PARTICIPLE");
                         };
 
                         check_end_quiz(data);
@@ -430,10 +431,10 @@ $level1 = json_decode($data); // decode the JSON feed
                         randomTense = myArray[Math.floor(Math.random() * myArray.length)];
                         if (randomTense === 'simple') {
                             description.textContent = "SIMPLE PAST";
-                            answerInput.setAttribute("placeholder", "SIMPLE PAST")
+                            //answerInput.setAttribute("placeholder", "SIMPLE PAST")
                         } else {
                             description.textContent = "PAST PARTICIPLE";
-                            answerInput.setAttribute("placeholder", "PAST PARTICIPLE")
+                            //answerInput.setAttribute("placeholder", "PAST PARTICIPLE")
                         }
 
                         check_end_quiz(data);
